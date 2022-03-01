@@ -14,17 +14,19 @@ const postcss = require('gulp-postcss'),
     ];
 
 gulp.task('pcss_to_css', function () {
-    return gulp.src('./src/*/*.pcss')
+    return gulp.src('./src/*.pcss')
+        .pipe(sourcemaps.init())
         .pipe(postcss(processors))
         .pipe(cssnano())
         .pipe(rename({
             extname: '.css'
         }))
-        .pipe(gulp.dest('./temp'));
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('css_concat', function () {
-    return gulp.src('./temp/*.css')
+    return gulp.src('./temp/*/*.css')
         .pipe(sourcemaps.init())
         .pipe(concat('bundle.css'))
         .pipe(sourcemaps.write('.'))
