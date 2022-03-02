@@ -86,6 +86,19 @@ function randomQuote() {
     );
 }
 
+function resizeQuoteBox() {
+    let textHeight = $("#dummy-text").outerHeight(true);
+    let authorHeight = $("#author").outerHeight(true);
+    let buttonsHeight = $(".buttons").outerHeight(true);
+
+    let newQuoteBoxHeight = textHeight + authorHeight + buttonsHeight - 50;
+    let currentQuoteBoxHeight = $(".quote-content").outerHeight(true);
+    if (newQuoteBoxHeight !== currentQuoteBoxHeight) {
+        console.log('resizing quote box');
+        $(".quote-content").height(newQuoteBoxHeight);
+    }
+}
+
 function startGranim() {
 
     var canvas = document.getElementById("gradient-canvas");
@@ -126,6 +139,7 @@ function startGranim() {
 }
 
 $(document).ready(function () {
+    addEventListener('resize', resizeQuoteBox);
     startGranim()
     getQuotes().then(() => {
         randomQuote();
