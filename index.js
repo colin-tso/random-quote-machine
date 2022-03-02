@@ -77,7 +77,7 @@ function randomQuote() {
     );
 
     //update background gradient color
-    granimInstance.changeState(colorIndex);
+    granimInstance.changeState(colorIndex + 1);
 
     $("#tweet-quote").attr(
         "href",
